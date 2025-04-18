@@ -6,10 +6,10 @@ Two versions of the classic Snake game:
 2. **Browser Version** (`snake game.html` for Desktop and `snake-mobile.html` for Mobile)
 
 # To play The Game
-1. **C program file (exe)**: [Download Snake Game.exe](tanjimwahid.github.io/snake_game/snake%20game.exe)
-2. **Play on Mobile**: [Play On Phone](tanjimwahid.github.io/snake_game/snake-mobile.html)
-3. **Play on Desktop Browser**: [Play on Desktop](ttanjimwahid.github.io/snake_game/snake%20game.html)
-4. **Modify The C Code**: [Download & Modify Code](ttanjimwahid.github.io/snake_game/snake%20game.c)
+1. **C program file (exe)**: [Download Snake Game.exe](/snake%20game.exe)
+2. **Play on Mobile**: [Play On Phone](/snake-mobile.html)
+3. **Play on Desktop Browser**: [Play on Desktop](/snake%20game.html)
+4. **Modify The C Code**: [Download & Modify Code](/snake%20game.c)
 
 
 ---
