@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Snake Game</title>
+    <style>
+      body {
+        margin: 0;
+        background: #111;
+        color: #fff;
+        text-align: center;
+        font-family: sans-serif;
+      }
+      canvas {
+        display: block;
+        margin: 20px auto;
+        background: #000;
+        border-radius: 3px;
+        box-shadow: 0px 20px 50px lch(100% 0.01 296.81 / 0.25);
+      }
+      #restartBtn {
+        display: none;
+        background: #28a745;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 10px;
+        border-radius: 11px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="gameCanvas"></canvas>
+    <div id="message"></div>
+    <button id="restartBtn">Restart</button>
+
+    <script>
+      const canvas = document.getElementById("gameCanvas");
+      const ctx = canvas.getContext("2d");
+      const COLS = 30,
+        ROWS = 15,
+        SIZE = 30;
+      canvas.width = COLS * SIZE;
+      canvas.height = ROWS * SIZE;
+
+      let snake, dir, fruit, score, gameOver, loop;
+
+      function setup() {
+        snake = [{ x: Math.floor(COLS / 2), y: Math.floor(ROWS / 2) }];
+        dir = { x: 0, y: 0 };
+        fruit = spawnFruit();
+        score = 0;
+        gameOver = false;
+        document.getElementById("message").textContent = "";
+        document.getElementById("restartBtn").style.display = "none";
+        draw();
+        loop = setInterval(update, 100);
+      }
+
+      function spawnFruit() {
+        let f;
+        do {
+          f = {
+            x: Math.floor(Math.random() * COLS),
+            y: Math.floor(Math.random() * ROWS),
+          };
+        } while (snake.some((p) => p.x === f.x && p.y === f.y));
+        return f;
+      }
+
+      document.getElementById("restartBtn").addEventListener("click", () => {
+        clearInterval(loop);
+        setup();
+      });
+
+      document.addEventListener("keydown", (e) => {
+        switch (e.key) {
+          case "a":
+          case "ArrowLeft":
+            if (dir.x !== 1) dir = { x: -1, y: 0 };
+            break;
+          case "d":
+          case "ArrowRight":
+            if (dir.x !== -1) dir = { x: 1, y: 0 };
+            break;
+          case "w":
+          case "ArrowUp":
+            if (dir.y !== 1) dir = { x: 0, y: -1 };
+            break;
+          case "s":
+          case "ArrowDown":
+            if (dir.y !== -1) dir = { x: 0, y: 1 };
+            break;
+          case "x":
+            if (!gameOver) endGame();
+            break;
+        }
+      });
+
+      function update() {
+        if (gameOver) return clearInterval(loop);
+        const head = { x: snake[0].x + dir.x, y: snake[0].y + dir.y };
+        // wall
+        if (head.x < 0 || head.x >= COLS || head.y < 0 || head.y >= ROWS)
+          return endGame();
+        // self
+        for (let i = 1; i < snake.length; i++)
+          if (snake[i].x === head.x && snake[i].y === head.y) return endGame();
+        snake.unshift(head);
+        // eat
+        if (head.x === fruit.x && head.y === fruit.y) {
+          score += 10;
+          fruit = spawnFruit();
+        } else {
+          snake.pop();
+        }
+        draw();
+      }
+
+      function draw() {
+        ctx.fillStyle = "#000";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        // border
+        ctx.strokeStyle = "#444";
+        ctx.lineWidth = 2;
+        ctx.strokeRect(0, 0, canvas.width, canvas.height);
+        // fruit
+        ctx.fillStyle = "red";
+        ctx.fillRect(fruit.x * SIZE, fruit.y * SIZE, SIZE, SIZE);
+        // snake
+        ctx.fillStyle = "lime";
+        snake.forEach((p) => ctx.fillRect(p.x * SIZE, p.y * SIZE, SIZE, SIZE));
+        // live score
+        ctx.fillStyle = "#fff";
+        ctx.font = "18px sans-serif";
+        ctx.fillText("Score: " + score, 10, 22);
+      }
+
+      function endGame() {
+        gameOver = true;
+        clearInterval(loop);
+        document.getElementById("message").textContent =
+          "Your score is " + score;
+        document.getElementById("restartBtn").style.display = "inline-block";
+      }
+
+      setup();
+    </script>
+  </body>
+</html>
