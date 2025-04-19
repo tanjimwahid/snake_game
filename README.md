@@ -5,6 +5,9 @@ Two versions of the classic Snake game:
 1. **C Console Version** (`snake game.c`)
 2. **Browser Version** (`snake game.html` for Desktop and `snake-mobile.html` for Mobile)
 
+Note: This game is fully open-source, and you're welcome to download, use, and modify the code for your own learning or projects. However, claiming full ownership or presenting it as entirely your own creation is not permitted. Please give proper credit where due.
+
+
 # To play The Game
 1. **C program file (exe)**: [Download Snake Game.exe](/snake_game/snake%20game.exe)
 2. **Play on Mobile**: [Play On Phone](/snake_game/snake-mobile.html)
@@ -16,7 +19,7 @@ Two versions of the classic Snake game:
 
 ## 📂 Folder Structure
 
-your-repo/ ├── snake.c ├── snake.html ├── README.md ├── LICENSE └── .gitignore
+your-repo/ ├── snake game.c ├── snake game.html ├── README.md ├── LICENSE └── .gitignore
 
 yaml
 Copy
@@ -37,7 +40,7 @@ gcc snake.c -o snake.exe
 ./snake.exe
 Or open a new Console‑App project in Visual Studio, add snake.c, then build & run.
 
-🌐 Browser Version
+## 🌐 Browser Version
 Prerequisites
 Any modern web browser
 
@@ -61,7 +64,7 @@ bash
 Copy
 Edit
 python3 -m http.server 8000
-In your browser go to:
+In your browser, go to:
 http://localhost:8000/snake.html
 
 ### 🎮 How to Play
@@ -74,4 +77,10 @@ Avoid hitting walls or your own tail
 Game Over: your score appears below the canvas
 
 Restart: click the green Restart button
+
+Tips:
+1. Plan your path ahead as the snake gets longer.
+2. Stay away from corners when your tail gets longer.
+3. Keep an eye on where the fruit spawns — and act fast!
+
 ```
